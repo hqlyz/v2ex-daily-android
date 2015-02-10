@@ -20,9 +20,7 @@ import org.json.JSONObject;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by yugy on 14-2-22.
- */
+
 public class V2EX {
 
     private static final String API_URL = "http://www.v2ex.com/api";
@@ -97,7 +95,7 @@ public class V2EX {
         new AsyncHttpClient().get(context, API_URL + API_TOPIC + "?node_id=" + nodeId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(JSONArray response) {
-                sharedPreferences.edit().putString("topics_" + nodeId + "_cache", response.toString()).commit();
+                sharedPreferences.edit().putString("topics_" + nodeId + "_cache", response.toString()).apply();
                 responseHandler.onSuccess(response);
                 super.onSuccess(response);
             }
@@ -128,7 +126,7 @@ public class V2EX {
         new AsyncHttpClient().get(context, API_URL + API_TOPIC + "?username=" + username, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(JSONArray response) {
-                sharedPreferences.edit().putString("topics_" + username + "_cache", response.toString()).commit();
+                sharedPreferences.edit().putString("topics_" + username + "_cache", response.toString()).apply();
                 responseHandler.onSuccess(response);
                 super.onSuccess(response);
             }
@@ -210,6 +208,11 @@ public class V2EX {
                 }
                 responseHandler.onSuccess(result);
                 super.onSuccess(statusCode, headers, responseBody);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
             }
         });
     }
