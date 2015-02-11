@@ -96,6 +96,7 @@ public class LoginActivity extends SwipeBackActivity implements View.OnClickList
         V2EX.login(LoginActivity.this, mUsername.getText().toString(), mPassword.getText().toString(), onceCode, new JsonHttpResponseHandler(){
             @Override
             public void onSuccess(JSONObject response) {
+                DebugUtils.log("LoginActivity-->login-->onSuccess");
                 if(LoginActivity.this != null){
                     try {
                         if(response.getString("result").equals("ok")){

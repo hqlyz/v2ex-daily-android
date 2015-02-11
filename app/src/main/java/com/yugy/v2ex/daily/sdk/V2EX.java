@@ -272,6 +272,7 @@ public class V2EX {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseBody) {
 //                DebugUtils.log(responseBody);
+                DebugUtils.log("V2EX-->login-->onSuccess");
                 JSONObject result = new JSONObject();
                 try {
                     result.put("result", "fail");
@@ -297,6 +298,7 @@ public class V2EX {
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 DebugUtils.log(statusCode);
+                DebugUtils.log("V2EX-->login-->onFailure");
                 JSONObject result = new JSONObject();
                 try {
                     if(statusCode == 302){
